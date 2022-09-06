@@ -1,2 +1,2 @@
 limactl start
-docker compose up
+lima nerdctl compose up
