@@ -29,6 +29,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 
 	implementation("org.flywaydb:flyway-mysql")
+	implementation("org.springframework.kafka:spring-kafka")
+
 	api("mysql:mysql-connector-java")
 
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")

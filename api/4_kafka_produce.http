@@ -1,0 +1,1 @@
+GET http://localhost:8080/kafka/produce?message=it_is_my_test_message
