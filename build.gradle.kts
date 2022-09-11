@@ -30,6 +30,7 @@ dependencies {
 
 	implementation("org.flywaydb:flyway-mysql")
 	implementation("org.springframework.kafka:spring-kafka")
+	implementation("io.projectreactor.kafka:reactor-kafka")
 
 	api("mysql:mysql-connector-java")
 
