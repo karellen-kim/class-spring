@@ -1,2 +1,2 @@
 limactl start
-lima nerdctl compose up
+lima nerdctl compose up --remove-orphans

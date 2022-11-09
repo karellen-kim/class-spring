@@ -18,6 +18,16 @@ services:
       - /var/run/docker.sock
     depends_on:
       - zookeeper
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    ports:
+      - 19200:9200
+    depends_on:
+      - kafka
   db:
     container_name: mysql
     image: mysql

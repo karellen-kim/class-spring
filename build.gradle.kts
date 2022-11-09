@@ -32,6 +32,10 @@ dependencies {
 	implementation("org.flywaydb:flyway-mysql")
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("io.projectreactor.kafka:reactor-kafka")
+	implementation("co.elastic.clients:elasticsearch-java:8.5.0")
+	implementation("com.fasterxml.jackson.core:jackson-core")
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.12.3")
+	implementation("jakarta.json:jakarta.json-api:2.0.1")
 
 	api("mysql:mysql-connector-java")
 

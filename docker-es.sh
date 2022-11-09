@@ -1,0 +1,1 @@
+lima nerdctl compose -f docker-es.yml up --remove-orphans
