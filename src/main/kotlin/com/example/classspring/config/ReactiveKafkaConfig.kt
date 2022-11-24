@@ -13,6 +13,7 @@ import java.util.*
 
 @Configuration
 class ReactiveKafkaConfig {
+
     @Bean
     fun reactiveKafkaProducerTemplate(
         properties: KafkaProperties

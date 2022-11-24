@@ -28,20 +28,20 @@ services:
       - 19200:9200
     depends_on:
       - kafka
-  db:
-    container_name: mysql
-    image: mysql
-    environment:
-      MYSQL_DATABASE: test_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_ROOT_HOST: '%'
-    command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
-    ports:
-      - "3306:3306"
-    volumes:
-      - /tmp/mysql_db
-    restart: always
+#  db:
+#    container_name: mysql
+#    image: mysql
+#    environment:
+#      MYSQL_DATABASE: test_db
+#      MYSQL_USER: user
+#      MYSQL_PASSWORD: user
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_ROOT_HOST: '%'
+#    command:
+#      - --character-set-server=utf8mb4
+#      - --collation-server=utf8mb4_unicode_ci
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - /tmp/mysql_db
+#    restart: always
