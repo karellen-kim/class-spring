@@ -1,11 +1,61 @@
 ### 참고 : https://esbook.kimjmin.net/04-data/4.1-rest-api
+### 인덱스 추가
+### https://www.elastic.co/guide/en/elasticsearch/reference/8.5/indices-create-index.html
+PUT http://localhost:19200/user
+Content-Type: application/json
+
+{
+  "settings" : {
+    "number_of_shards" : 1,
+    "number_of_replicas" : 1,
+    "analysis": {
+      "normalizer": {
+        "my_normalizer": {
+          "type": "custom",
+          "char_filter": [],
+          "filter": ["lowercase", "asciifolding"]
+        }
+      }
+    }
+  },
+  "mappings" : {
+    "properties" : {
+      "id" : { "type" : "integer" },
+      "name" : {
+        "type" : "text",
+        "analyzer" : "standard"
+      },
+      "age" : { "type" : "integer" },
+      "job" : { "type" : "keyword", "normalizer" : "my_normalizer" }
+    }
+  }
+}
+
+### index 확인
+GET http://localhost:19200/user
+
+### index 삭제
+DELETE http://localhost:19200/user
+
 ### 추가
 POST http://localhost:19200/user/_doc/1
 Content-Type: application/json
 
 {
-  "name": "kim",
-  "age": 1
+  "id" : 1,
+  "name": "Kim su hyun",
+  "age": 10,
+  "job" : "Server Developer"
+}
+###
+POST http://localhost:19200/user/_doc/2
+Content-Type: application/json
+
+{
+  "id" : 2,
+  "name": "Gang dong won",
+  "age": 30,
+  "job" : "Server Developer"
 }
 
 ### 수정
@@ -13,7 +63,7 @@ PUT http://localhost:19200/user/_doc/1
 Content-Type: application/json
 
 {
-  "name": "kim",
+  "name": "Kim su hyun",
   "age": 10
 }
 
@@ -23,7 +73,7 @@ Content-Type: application/json
 
 {
   "doc": {
-    "age": 5
+    "name": "Kim su hyun!"
   }
 }
 
@@ -55,13 +105,55 @@ Content-Type: application/json
 {
   "query": {
     "match": {
-      "name": "kim"
+      "name": "Kim"
     }
   }
 }
 
-### index 확인
-GET http://localhost:19200/user
+### aggregation
+### https://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations.html
+GET http://localhost:19200/user/_search
+Content-Type: application/json
 
-### search
-GET http://localhost:8080/es/search?q=kim
+{
+  "query": {
+    "match": {
+      "job": "server developer"
+    }
+  },
+  "aggs": {
+    "job_aggs": {
+      "terms": {
+        "field": "job"
+      }
+    }
+  }
+}
+
+### analyzer
+### https://www.elastic.co/guide/en/elasticsearch/reference/8.5/indices-analyze.html
+POST http://localhost:19200/_analyze
+Content-Type: application/json
+
+{
+  "analyzer" : "standard",
+  "text" : "우리나라가 좋은 나라 elastic Elastic"
+}
+
+###
+POST http://localhost:19200/_analyze
+Content-Type: application/json
+
+{
+  "tokenizer" : "ngram",
+  "text" : "Harry potter"
+}
+
+### edge ngram analyze
+POST http://localhost:19200/_analyze
+Content-Type: application/json
+
+{
+  "tokenizer": "edge_ngram",
+  "text": "Quick Fox"
+}
